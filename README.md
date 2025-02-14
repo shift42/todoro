@@ -1,6 +1,8 @@
 # Todoro
 A lightweight Rails engine that lets any model manage task lists and tasks with a simple, flexible API.
 
+![Totoro](totoro.png)
+
 ## Usage
 
 Include Taskable in the model(s) that can have tasks
