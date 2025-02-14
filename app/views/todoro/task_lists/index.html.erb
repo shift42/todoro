@@ -1,6 +1,15 @@
-<h1> Task List </h1>
+<h1>Task Lists for <%= @taskable.class.name %>: <%= @taskable.try(:name) || "Unknown" %></h1>
+
+<%= link_to "Create New Task List", new_taskable_task_list_path(taskable: @taskable.class.name, taskable_id: @taskable.id), class: "btn btn-primary" %>
+
 <ul>
-  <%= @task_lists.each do |task_list| %>
-    <li> <%= task_list.name %> </li>
+  <% @task_lists.each do |task_list| %>
+    <li>
+      <%= link_to task_list.name, taskable_task_list_path(taskable: @taskable.class.name, taskable_id: @taskable.id, id: task_list.id) %>
+      (<%= link_to "Edit", edit_taskable_task_list_path(taskable: @taskable.class.name, taskable_id: @taskable.id, id: task_list.id) %> |
+       <%= link_to "Delete", taskable_task_list_path(taskable: @taskable.class.name, taskable_id: @taskable.id, id: task_list.id), method: :delete, data: { confirm: "Are you sure?" } %>)
+    </li>
   <% end %>
 </ul>
+
+<%= link_to "Back", root_path, class: "btn btn-secondary" %>
