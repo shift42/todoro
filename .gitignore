@@ -1,0 +1,8 @@
+/.bundle/
+/doc/
+/log/*.log
+/pkg/
+/tmp/
+/spec/todoapp/log/*.log
+/spec/todoapp/storage/
+/spec/todoapp/tmp/
