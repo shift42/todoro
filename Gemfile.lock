@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    todoro (0.1.0)
+    todoro (0.1.1)
       rails (>= 8.0.1)
 
 GEM
