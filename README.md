@@ -7,7 +7,7 @@ Include Taskable in the model(s) that can have tasks
 
 ```ruby
 class Project < ApplicationRecord
-  include Todoro::Taskable
+  acts_as_taskable
 end
 ```
 
