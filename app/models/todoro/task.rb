@@ -14,6 +14,8 @@ module Todoro
     private
 
     def set_default_reminders
+      return unless expiry_date
+
       reminders.create(remind_at: expiry_date - 1.hour)
       reminders.create(remind_at: expiry_date - 1.day)
     end
