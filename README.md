@@ -1,5 +1,5 @@
 # Todoro
-Short description and motivation.
+A lightweight Rails engine that lets any model manage task lists and tasks with a simple, flexible API.
 
 ## Usage
 
