@@ -272,6 +272,7 @@ DEPENDENCIES
   propshaft
   pry
   puma
+  rdoc
   rspec-rails (~> 7.1)
   rubocop-rails-omakase
   todoro!

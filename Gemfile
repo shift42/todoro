@@ -11,12 +11,13 @@ gem "propshaft"
 
 # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
 gem "rubocop-rails-omakase", require: false
+gem "rdoc"
 
 # Start debugger with binding.b [https://github.com/ruby/debug]
 # gem "debug", ">= 1.0.0"
 
 group :test do
-  gem 'factory_bot_rails'
+  gem "factory_bot_rails"
   gem "rspec-rails", "~> 7.1"
-  gem 'pry'
+  gem "pry"
 end

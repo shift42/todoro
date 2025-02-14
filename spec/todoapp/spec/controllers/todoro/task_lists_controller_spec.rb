@@ -21,4 +21,3 @@ RSpec.describe Todoro::TaskListsController, type: :controller do
     end
   end
 end
-
