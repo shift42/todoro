@@ -31,3 +31,7 @@ module Todoro
   end
 end
 
+ActiveSupport.on_load(:active_record) do
+  extend Todoro::Taskable::ClassMethods
+end
+
