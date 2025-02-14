@@ -7,7 +7,7 @@ module Todoro
     validates :description, presence: true
     validates :status, presence: true, inclusion: { in: %w[pending completed] }
 
-    enum status: { pending: "pending", completed: "completed" }
+    enum :status, { pending: "pending", completed: "completed" }
 
     after_create :set_default_reminders
 
