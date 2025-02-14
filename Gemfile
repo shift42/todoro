@@ -15,4 +15,8 @@ gem "rubocop-rails-omakase", require: false
 # Start debugger with binding.b [https://github.com/ruby/debug]
 # gem "debug", ">= 1.0.0"
 
-gem "rspec-rails", "~> 7.1", :group => :test
+group :test do
+  gem 'factory_bot_rails'
+  gem "rspec-rails", "~> 7.1"
+  gem 'pry'
+end
