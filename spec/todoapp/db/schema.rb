@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_14_105918) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_15_024110) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -35,6 +35,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_14_105918) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["taskable_type", "taskable_id"], name: "index_todoro_task_lists_on_taskable"
+    t.index ["taskable_type", "taskable_id"], name: "index_todoro_task_lists_on_taskable_type_and_taskable_id"
   end
 
   create_table "todoro_tasks", force: :cascade do |t|
@@ -45,6 +46,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_14_105918) do
     t.bigint "task_list_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["expiry_date"], name: "index_todoro_tasks_on_expiry_date"
+    t.index ["status"], name: "index_todoro_tasks_on_status"
     t.index ["task_list_id"], name: "index_todoro_tasks_on_task_list_id"
     t.check_constraint "status::text = ANY (ARRAY['pending'::character varying, 'completed'::character varying]::text[])", name: "status_check"
   end
