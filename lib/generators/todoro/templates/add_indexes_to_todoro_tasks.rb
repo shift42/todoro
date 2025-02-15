@@ -1,4 +1,4 @@
-class AddIndexesToTodoroTasks < ActiveRecord::Migration[8.0]
+class AddIndexesToTodoroTasks < ActiveRecord::Migration[ActiveRecord::Migration.current_version]
    def change
     add_index :todoro_task_lists, [ :taskable_type, :taskable_id ]
     add_index :todoro_tasks, :status

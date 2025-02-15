@@ -28,7 +28,7 @@ $ gem install todoro
 Generate the required migrations
 
 ```ruby
-rails todoro:install:migrations
+rails generate todoro:install
 ```
 
 Include Taskable in the model(s) that can have tasks

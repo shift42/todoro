@@ -1,4 +1,4 @@
-class CreateTodoroTaskLists < ActiveRecord::Migration[8.0]
+class CreateTodoroTaskLists < ActiveRecord::Migration[ActiveRecord::Migration.current_version]
   def change
     create_table :todoro_task_lists do |t|
       t.string :name, null: false

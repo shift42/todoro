@@ -1,4 +1,4 @@
-class CreateTodoroReminders < ActiveRecord::Migration[8.0]
+class CreateTodoroReminders < ActiveRecord::Migration[ActiveRecord::Migration.current_version]
   def change
     create_table :todoro_reminders do |t|
       t.references :task, null: false, foreign_key: { to_table: :todoro_tasks }

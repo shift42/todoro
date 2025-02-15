@@ -1,4 +1,4 @@
-class CreateTodoroTasks < ActiveRecord::Migration[8.0]
+class CreateTodoroTasks < ActiveRecord::Migration[ActiveRecord::Migration.current_version]
   def change
     create_table :todoro_tasks do |t|
       t.string :title
