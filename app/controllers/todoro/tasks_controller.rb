@@ -10,7 +10,7 @@ module Todoro
     def create
       @task = @task_list.tasks.new(task_params)
       if @task.save
-        redirect_to todoro.taskable_task_list_path(taskable: @task_list.taskable.class.name, taskable_id: @task_list.taskable.id, id: @task_list.id), notice: "Task created successfully."
+        redirect_to task_list_path(taskable: @task_list.taskable.class.name, taskable_id: @task_list.taskable.id, id: @task_list.id), notice: "Task created successfully."
       else
         render :new
       end
@@ -33,7 +33,7 @@ module Todoro
 
     def complete
       @task.update(status: "completed")
-      redirect_to todoro.taskable_task_list_path(taskable: @task_list.taskable.class.name, taskable_id: @task_list.taskable.id, id: @task_list.id), notice: "Task marked as completed."
+      redirect_to task_list_path(taskable: @task_list.taskable.class.name, taskable_id: @task_list.taskable.id, id: @task_list.id), notice: "Task marked as completed."
     end
 
     private

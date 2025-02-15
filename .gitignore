@@ -6,3 +6,5 @@
 /spec/todoapp/log/*.log
 /spec/todoapp/storage/
 /spec/todoapp/tmp/
+/rdoc/
+/db/

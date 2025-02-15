@@ -1,4 +1,4 @@
-class CreateProjects < ActiveRecord::Migration[8.0]
+class CreateProjects < ActiveRecord::Migration[ActiveRecord::Migration.current_version]
   def change
     create_table :projects do |t|
       t.string :name

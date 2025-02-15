@@ -16,7 +16,7 @@ module Todoro
     def create
       @task_list = @taskable.task_lists.new(task_list_params)
       if @task_list.save
-        redirect_to taskable_task_lists_path(taskable: @taskable), notice: "Task list created successfully."
+        redirect_to task_lists_path(taskable: @taskable), notice: "Task list created successfully."
       else
         render :new
       end
@@ -26,7 +26,7 @@ module Todoro
 
     def update
       if @task_list.update(task_list_params)
-        redirect_to taskable_task_lists_path(taskable: @task_list.taskable), notice: "Task list updated successfully."
+        redirect_to task_lists_path(taskable: @task_list.taskable), notice: "Task list updated successfully."
       else
         render :edit
       end
@@ -35,7 +35,7 @@ module Todoro
     def destroy
       taskable = @task_list.taskable
       @task_list.destroy
-      redirect_to taskable_task_lists_path(taskable: taskable), notice: "Task list deleted."
+      redirect_to task_lists_path(taskable: taskable), notice: "Task list deleted."
     end
 
     private
