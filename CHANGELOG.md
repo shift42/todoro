@@ -1,3 +1,8 @@
+# Unreleased
+
+- Bug fix: Update generated routes so that resource root path does not override existing applciation routes
+- Add initializer to precompile assets so that main app can load views with Todoro's layout
+
 ### 0.1.5 - 2025-02-16
 
 - Automatic route generation for any model that includes `acts_as_taskable`, eliminating the need for manual route configuration.
