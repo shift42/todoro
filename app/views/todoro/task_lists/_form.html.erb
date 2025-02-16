@@ -1,12 +1,9 @@
-<%= form_with model: [taskable, task_list], local: true do |form| %>
+<%= form_with model: task_list, url: polymorphic_path([@taskable, task_list]), local: true do |form| %>
   <div class="form-group">
     <%= form.label :name %>
     <%= form.text_field :name, class: "form-control", required: true %>
   </div>
 
-  <%= form.hidden_field :taskable_id, value: taskable.id %>
-  <%= form.hidden_field :taskable_type, value: taskable.class.name %>
 
   <%= form.submit class: "btn btn-success" %>
 <% end %>
-

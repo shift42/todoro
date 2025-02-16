@@ -16,8 +16,11 @@ gem "rdoc"
 # Start debugger with binding.b [https://github.com/ruby/debug]
 # gem "debug", ">= 1.0.0"
 
+group :test, :development do
+  gem "pry"
+end
+
 group :test do
   gem "factory_bot_rails"
   gem "rspec-rails", "~> 7.1"
-  gem "pry"
 end

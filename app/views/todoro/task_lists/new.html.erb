@@ -2,4 +2,4 @@
 
 <%= render "form", task_list: @task_list %>
 
-<%= link_to "Back to Task Lists", task_lists_path, class: "btn btn-secondary" %>
+<%= link_to "Back to Task Lists", polymorphic_path([@taskable, @task_list]), class: "btn btn-secondary" %>

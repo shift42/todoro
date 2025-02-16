@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  mount Todoro::Engine => "/todoro"
+  mount Todoro::Engine => "/"
 end

@@ -8,9 +8,10 @@ module Todoro
     end
 
     def create
-      @task = @task_list.tasks.new(task_params)
+      @task = @task_list.tasks.build(task_params)
+
       if @task.save
-        redirect_to task_list_path(taskable: @task_list.taskable.class.name, taskable_id: @task_list.taskable.id, id: @task_list.id), notice: "Task created successfully."
+        redirect_to [ @taskable, @task_list ], notice: "Task created successfully."
       else
         render :new
       end
@@ -20,7 +21,7 @@ module Todoro
 
     def update
       if @task.update(task_params)
-        redirect_to @task_list, notice: "Task updated successfully."
+        redirect_to [ @taskable, @task_list ], notice: "Task updated successfully."
       else
         render :edit
       end
@@ -28,26 +29,26 @@ module Todoro
 
     def destroy
       @task.destroy
-      redirect_to @task_list, notice: "Task deleted."
+      redirect_to [ @taskable, @task_list ], notice: "Task deleted."
     end
 
     def complete
       @task.update(status: "completed")
-      redirect_to task_list_path(taskable: @task_list.taskable.class.name, taskable_id: @task_list.taskable.id, id: @task_list.id), notice: "Task marked as completed."
+      redirect_to [ @taskable, @task_list ], notice: "Task marked as completed."
     end
 
     private
-
-    def set_task_list
-      @task_list = Todoro::TaskList.find(params[:task_list_id])
-    end
 
     def set_task
       @task = @task_list.tasks.find(params[:id])
     end
 
+    def set_task_list
+      @task_list = @taskable.task_lists.find(params[:task_list_id])
+    end
+
     def task_params
-      params.require(:task).permit(:title, :description, :expiry_date, :status)
+      params.require(:task).permit(:title, :description, :status, :expiry_date)
     end
   end
 end
