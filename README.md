@@ -1,5 +1,3 @@
-To enhance the **Todoro** gem's documentation, here's an updated version of the `README.md` file that includes instructions on mounting the engine and customizing the mount path:
-
 # Todoro
 
 A lightweight Rails engine that lets any model manage task lists and tasks with a simple, flexible API.
@@ -53,6 +51,22 @@ task = project.add_task_to_list(task_list, "Build homepage", "Implement UI compo
 puts project.tasks # Lists all tasks in all its task lists
 ```
 
+## Automatic Route Generation
+
+Todoro automatically generates routes for any model that includes `acts_as_taskable`. For example, if `Project` includes `acts_as_taskable`, the following routes are created:
+
+```sh
+GET    /projects/:project_id/task_lists(.:format)
+POST   /projects/:project_id/task_lists(.:format)
+GET    /projects/:project_id/task_lists/:id(.:format)
+PATCH  /projects/:project_id/task_lists/:id(.:format)
+DELETE /projects/:project_id/task_lists/:id(.:format)
+GET    /projects/:project_id/task_lists/:task_list_id/tasks(.:format)
+POST   /projects/:project_id/task_lists/:task_list_id/tasks(.:format)
+```
+
+These routes are automatically configured, so no additional setup is needed.
+
 ## Mounting the Engine
 
 To access Todoro's routes, mount the engine in your application's routes file:
@@ -60,28 +74,12 @@ To access Todoro's routes, mount the engine in your application's routes file:
 ```ruby
 # config/routes.rb
 Rails.application.routes.draw do
-  mount Todoro::Engine, at: '/todoro'
+  mount Todoro::Engine, at: "/"
   # Other routes...
 end
 ```
 
-This makes Todoro's features accessible under the `/todoro` path (e.g., `http://yourdomain.com/todoro`).
-
-### Customizing the Mount Path
-
-You can mount Todoro at any path that fits your application's structure:
-
-- To mount at the root:
-
-  ```ruby
-  Rails.application.routes.draw do
-    mount Todoro::Engine, at: '/'
-    # Other routes...
-  end
-  ```
-
-  Now, Todoro's routes are available at the root URL (e.g., `http://yourdomain.com/`).
-
+Since Todoro dynamically registers routes for `acts_as_taskable` models, no further route configuration is required.
 
 ## License
 
