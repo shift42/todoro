@@ -17,13 +17,6 @@ RSpec.describe Todoro::Task, type: :model do
     expect(task.errors[:title]).to include("can't be blank")
   end
 
-  it "is invalid without a description" do
-    task = Todoro::Task.new(title: "Missing description", status: "pending", task_list: task_list)
-
-    expect(task).not_to be_valid
-    expect(task.errors[:description]).to include("can't be blank")
-  end
-
   it "is invalid without a status" do
     task = Todoro::Task.new(title: "Missing status", description: "Testing", status: nil, task_list: task_list)
 

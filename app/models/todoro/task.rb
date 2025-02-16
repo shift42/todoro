@@ -4,7 +4,6 @@ module Todoro
     has_many :reminders, dependent: :destroy
 
     validates :title, presence: true
-    validates :description, presence: true
     validates :status, presence: true, inclusion: { in: %w[pending completed] }
 
     enum :status, { pending: "pending", completed: "completed" }
