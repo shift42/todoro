@@ -4,7 +4,9 @@
 - Add initializer to precompile assets so that main app can load views with Todoro's layout
 - Added support for **Task Steps**
 - Updated **Tasks**: renamed `expiry_date` to `due_date` and introduced `completed_at`, `priority` and `reccuring_pattern`
-
+- Introduced complete! method in Todoro::Task to set completed_at timestamp and mark tasks as completed.
+- Added Todoro::TaskStep model, allowing tasks to have multiple subtasks.
+- Integrated Turbo to enable dynamic subtask creation and completion without full-page reloads.
 
 ### 0.1.5 - 2025-02-16
 
