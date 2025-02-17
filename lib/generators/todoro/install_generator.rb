@@ -14,6 +14,7 @@ module Todoro
         migration_template "add_indexes_to_todoro_tasks.rb", "db/migrate/add_indexes_to_todoro_tasks.rb"
         migration_template "update_todoro_tasks_for_enhanced_features.rb", "db/migrate/update_todoro_tasks_for_enhanced_features.rb"
         migration_template "create_todoro_task_steps.rb", "db/migrate/create_todoro_task_steps.rb"
+        migration_template "create_todoro_task_assignments.rb", "db/migrate/create_todoro_task_assignments.rb"
       end
 
       def self.next_migration_number(dirname)

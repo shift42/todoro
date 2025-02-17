@@ -10,9 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_17_014148) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_17_191413) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "employees", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string "name"
@@ -26,6 +32,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_17_014148) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["task_id"], name: "index_todoro_reminders_on_task_id"
+  end
+
+  create_table "todoro_task_assignments", force: :cascade do |t|
+    t.bigint "task_id", null: false
+    t.string "assignee_type", null: false
+    t.bigint "assignee_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assignee_type", "assignee_id"], name: "index_todoro_task_assignments_on_assignee"
+    t.index ["task_id"], name: "index_todoro_task_assignments_on_task_id"
   end
 
   create_table "todoro_task_lists", force: :cascade do |t|
@@ -66,7 +82,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_17_014148) do
     t.check_constraint "status::text = ANY (ARRAY['pending'::character varying, 'completed'::character varying]::text[])", name: "status_check"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "todoro_reminders", "todoro_tasks", column: "task_id"
+  add_foreign_key "todoro_task_assignments", "todoro_tasks", column: "task_id"
   add_foreign_key "todoro_task_steps", "todoro_tasks", column: "task_id"
   add_foreign_key "todoro_tasks", "todoro_task_lists", column: "task_list_id"
 end

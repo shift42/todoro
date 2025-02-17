@@ -1,6 +1,7 @@
 require "todoro/version"
 require "todoro/engine"
 require "todoro/taskable"
+require "todoro/taskable_assignee"
 
 module Todoro
   mattr_accessor :assignable_models

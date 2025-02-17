@@ -7,6 +7,9 @@
 - Introduced complete! method in Todoro::Task to set completed_at timestamp and mark tasks as completed.
 - Added Todoro::TaskStep model, allowing tasks to have multiple subtasks.
 - Integrated Turbo to enable dynamic subtask creation and completion without full-page reloads.
+- Introduced `taskable_assignee`, allowing models to register as assignable entities.
+- Tasks now support dynamic polymorphic assignments to multiple assignees (e.g., `Employee`, `Role`).
+- Automatically generates `has_many` associations in `Todoro::Task` for each registered `taskable_assignee`.
 
 ### 0.1.5 - 2025-02-16
 

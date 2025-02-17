@@ -5,8 +5,6 @@ module Todoro
     has_many :task_steps, class_name: "Todoro::TaskStep", dependent: :destroy
 
     has_many :task_assignments, dependent: :destroy
-    has_many :assignees, through: :task_assignments, source: :assignee
-
 
     validates :title, presence: true
     validates :status, presence: true, inclusion: { in: %w[pending completed] }

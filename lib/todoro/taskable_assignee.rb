@@ -10,7 +10,15 @@ module Todoro
     class_methods do
       def taskable_assignee
         Todoro.assignable_models << self.name unless Todoro.assignable_models.include?(self.name)
+
+        Todoro::Task.class_eval <<-RUBY, __FILE__, __LINE__ + 1
+            has_many :#{self.name.underscore.pluralize}, through: :task_assignments, source: :assignee, source_type: "#{self.name}"
+        RUBY
       end
     end
   end
+end
+
+ActiveSupport.on_load(:active_record) do
+  extend Todoro::TaskableAssignee::ClassMethods
 end
