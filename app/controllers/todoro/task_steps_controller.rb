@@ -1,14 +1,14 @@
 module Todoro
   class TaskStepsController < ApplicationController
     before_action :set_task
-    before_action :set_task_step, only: [:complete]
+    before_action :set_task_step, only: [ :complete ]
 
     def create
       @task_step = @task.task_steps.build(task_step_params)
 
       if @task_step.save
         respond_to do |format|
-          format.html { redirect_to [@taskable, @task.task_list], notice: "Subtask added." }
+          format.html { redirect_to [ @taskable, @task.task_list ], notice: "Subtask added." }
           format.turbo_stream
         end
       else
@@ -20,7 +20,7 @@ module Todoro
     def complete
       @task_step.update(completed: true)
       respond_to do |format|
-        format.html { redirect_to [@taskable, @task.task_list], notice: "Subtask marked as completed." }
+        format.html { redirect_to [ @taskable, @task.task_list ], notice: "Subtask marked as completed." }
         format.turbo_stream
       end
     end

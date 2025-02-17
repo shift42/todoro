@@ -1,6 +1,6 @@
 namespace :version do
   desc "Bump the gem version, update changelog, build and release the gem"
-  task :bump, [:version] => :environment do |t, args|
+  task :bump, [ :version ] => :environment do |t, args|
     version = args[:version]
     raise "Please specify a version. Usage: rake version:bump[0.1.5]" unless version
 

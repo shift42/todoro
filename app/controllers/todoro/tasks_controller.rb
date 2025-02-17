@@ -50,7 +50,7 @@ module Todoro
 
     def task_params
       params.require(:task).permit(:title, :description, :status, :due_date,
-                                   task_steps_attributes: [:id, :title, :completed, :_destroy])
+                                   task_steps_attributes: [ :id, :title, :completed, :_destroy ])
     end
   end
 end
