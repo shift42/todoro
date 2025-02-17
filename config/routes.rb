@@ -6,6 +6,10 @@ Todoro::Engine.routes.draw do
       resources :task_lists do
         resources :tasks, only: [ :new, :edit, :create, :update, :destroy ] do
           patch :complete, on: :member
+
+          resources :task_steps, only: [ :create ], path: 'step' do
+            patch :complete, on: :member
+          end
         end
       end
     end

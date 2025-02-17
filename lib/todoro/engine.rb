@@ -11,5 +11,12 @@ module Todoro
     initializer "todoro.assets.precompile" do |app|
       app.config.assets.precompile += %w[todoro/application.css todoro/application.js]
     end
+
+    initializer "todoro.import_turbo" do
+      ActiveSupport.on_load(:action_view) do
+        include Turbo::FramesHelper
+        include Turbo::StreamsHelper
+      end
+    end
   end
 end

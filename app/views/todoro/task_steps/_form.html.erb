@@ -1,0 +1,8 @@
+<%= form_with model: Todoro::TaskStep.new, url: [@taskable, @task_list, task, :task_steps], method: :post, local: true do |form| %>
+  <div class="form-group">
+    <%= form.label :title, "New Subtask" %>
+    <%= form.text_field :title, class: "form-control", required: true %>
+  </div>
+
+  <%= form.submit "Add Subtask", class: "btn btn-primary" %>
+<% end %>

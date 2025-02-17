@@ -1,0 +1,7 @@
+<div id="task_step_<%= task_step.id %>">
+  <%= task_step.title %> - <%= task_step.completed ? "✅" : "❌" %>
+
+  <%= button_to "Complete", polymorphic_path([@task_list.taskable, @task_list, task_step.task, task_step], action: :complete), method: :patch, class: "btn btn-success btn-link", data: { turbo: true } unless task_step.completed %>
+
+  <%= button_to "Delete", polymorphic_path([@task_list.taskable, @task_list, task_step.task, task_step]), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-link" %>
+</div>

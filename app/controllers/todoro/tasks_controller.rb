@@ -5,6 +5,7 @@ module Todoro
 
     def new
       @task = @task_list.tasks.new
+      @task.task_steps.build
     end
 
     def create
@@ -33,7 +34,7 @@ module Todoro
     end
 
     def complete
-      @task.update(status: "completed")
+      @task.complete!
       redirect_to [ @taskable, @task_list ], notice: "Task marked as completed."
     end
 
@@ -48,7 +49,8 @@ module Todoro
     end
 
     def task_params
-      params.require(:task).permit(:title, :description, :status, :due_date)
+      params.require(:task).permit(:title, :description, :status, :due_date,
+                                   task_steps_attributes: [:id, :title, :completed, :_destroy])
     end
   end
 end

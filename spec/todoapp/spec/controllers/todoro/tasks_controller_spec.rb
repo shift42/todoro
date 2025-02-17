@@ -27,6 +27,7 @@ RSpec.describe "Todoro::TasksController", type: :request do
 
       expect(response).to have_http_status(:redirect)
       expect(task.reload.status).to eq("completed")
+      expect(task.reload.completed_at).not_to be_nil
     end
   end
 

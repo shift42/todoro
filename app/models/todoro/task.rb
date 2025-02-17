@@ -11,6 +11,8 @@ module Todoro
 
     after_create :set_default_reminders
 
+    accepts_nested_attributes_for :task_steps
+
     def complete!
       update(status: "completed", completed_at: Time.zone.now)
     end
