@@ -2,6 +2,7 @@ module Todoro
   class Task < ApplicationRecord
     belongs_to :task_list
     has_many :reminders, dependent: :destroy
+    has_many :task_steps, class_name: "Todoro::TaskStep", dependent: :destroy
 
     validates :title, presence: true
     validates :status, presence: true, inclusion: { in: %w[pending completed] }
@@ -13,10 +14,10 @@ module Todoro
     private
 
     def set_default_reminders
-      return unless expiry_date
+      return unless due_date
 
-      reminders.create(remind_at: expiry_date - 1.hour)
-      reminders.create(remind_at: expiry_date - 1.day)
+      reminders.create(remind_at: due_date - 1.hour)
+      reminders.create(remind_at: due_date - 1.day)
     end
   end
 end

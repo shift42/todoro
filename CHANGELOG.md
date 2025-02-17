@@ -2,6 +2,9 @@
 
 - Bug fix: Update generated routes so that resource root path does not override existing applciation routes
 - Add initializer to precompile assets so that main app can load views with Todoro's layout
+- Added support for **Task Steps**
+- Updated **Tasks**: renamed `expiry_date` to `due_date` and introduced `completed_at`, `priority` and `reccuring_pattern`
+
 
 ### 0.1.5 - 2025-02-16
 

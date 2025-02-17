@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_15_225045) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_17_012840) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -38,20 +38,35 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_15_225045) do
     t.index ["taskable_type", "taskable_id"], name: "index_todoro_task_lists_on_taskable_type_and_taskable_id"
   end
 
+  create_table "todoro_task_steps", force: :cascade do |t|
+    t.bigint "task_id", null: false
+    t.string "title"
+    t.boolean "completed", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_todoro_task_steps_on_task_id"
+  end
+
   create_table "todoro_tasks", force: :cascade do |t|
     t.string "title"
-    t.text "description", null: false
-    t.datetime "expiry_date"
+    t.text "description"
+    t.datetime "due_date"
     t.string "status", default: "pending", null: false
     t.bigint "task_list_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["expiry_date"], name: "index_todoro_tasks_on_expiry_date"
+    t.integer "priority", default: 1, null: false
+    t.integer "recurrence_pattern"
+    t.datetime "completed_at"
+    t.index ["due_date"], name: "index_todoro_tasks_on_due_date"
     t.index ["status"], name: "index_todoro_tasks_on_status"
     t.index ["task_list_id"], name: "index_todoro_tasks_on_task_list_id"
+    t.check_constraint "(recurrence_pattern = ANY (ARRAY[0, 1, 2, 3])) OR recurrence_pattern IS NULL", name: "recurrence_check"
+    t.check_constraint "priority = ANY (ARRAY[0, 1, 2])", name: "priority_check"
     t.check_constraint "status::text = ANY (ARRAY['pending'::character varying, 'completed'::character varying]::text[])", name: "status_check"
   end
 
   add_foreign_key "todoro_reminders", "todoro_tasks", column: "task_id"
+  add_foreign_key "todoro_task_steps", "todoro_tasks", column: "task_id"
   add_foreign_key "todoro_tasks", "todoro_task_lists", column: "task_list_id"
 end

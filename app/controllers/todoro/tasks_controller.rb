@@ -48,7 +48,7 @@ module Todoro
     end
 
     def task_params
-      params.require(:task).permit(:title, :description, :status, :expiry_date)
+      params.require(:task).permit(:title, :description, :status, :due_date)
     end
   end
 end
