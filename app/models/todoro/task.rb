@@ -4,6 +4,10 @@ module Todoro
     has_many :reminders, dependent: :destroy
     has_many :task_steps, class_name: "Todoro::TaskStep", dependent: :destroy
 
+    has_many :task_assignments, dependent: :destroy
+    has_many :assignees, through: :task_assignments, source: :assignee
+
+
     validates :title, presence: true
     validates :status, presence: true, inclusion: { in: %w[pending completed] }
 
@@ -15,6 +19,14 @@ module Todoro
 
     def complete!
       update(status: "completed", completed_at: Time.zone.now)
+    end
+
+    def assign_to(assignee)
+      task_assignments.find_or_create_by(assignee: assignee)
+    end
+
+    def unassign(assignee)
+      task_assignments.where(assignee: assignee).destroy_all
     end
 
     private

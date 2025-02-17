@@ -3,6 +3,9 @@ require "todoro/engine"
 require "todoro/taskable"
 
 module Todoro
+  mattr_accessor :assignable_models
+  self.assignable_models = []
+
   def self.taskable_models
     Rails.application.eager_load!
 
