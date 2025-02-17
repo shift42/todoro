@@ -42,4 +42,17 @@ RSpec.describe Todoro::Task, type: :model do
     expect(task.task_steps.count).to eq(2)
     expect(task.task_steps).to include(step1, step2)
   end
+
+  describe "#complete!" do
+    it "updates the status and sets the completed_at to now" do
+      datetime = Time.zone.local(2025, 2, 17, 10, 0, 0)
+
+      travel_to datetime do
+        task.complete!
+      end
+
+      expect(task.status).to eq('completed')
+      expect(task.completed_at).to eq(datetime)
+    end
+  end
 end

@@ -8,7 +8,7 @@ class UpdateTodoroTasksForEnhancedFeatures < ActiveRecord::Migration[ActiveRecor
     end
 
     rename_column :todoro_tasks, :expiry_date, :due_date
-    change_column_null :todoro_tasks, :description, true 
+    change_column_null :todoro_tasks, :description, true
 
 
     execute <<-SQL

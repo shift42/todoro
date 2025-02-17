@@ -11,6 +11,10 @@ module Todoro
 
     after_create :set_default_reminders
 
+    def complete!
+      update(status: "completed", completed_at: Time.zone.now)
+    end
+
     private
 
     def set_default_reminders
