@@ -1,7 +1,7 @@
 module Todoro
   class TaskStepsController < ApplicationController
     before_action :set_task
-    before_action :set_task_step, only: [ :complete ]
+    before_action :set_task_step, only: [ :complete, :destroy ]
 
     def create
       @task_step = @task.task_steps.build(task_step_params)
@@ -16,9 +16,16 @@ module Todoro
       end
     end
 
-
     def complete
       @task_step.update(completed: true)
+      respond_to do |format|
+        format.html { redirect_to [ @taskable, @task.task_list ], notice: "Subtask marked as completed." }
+        format.turbo_stream
+      end
+    end
+
+    def destroy
+      @task_step.delete
       respond_to do |format|
         format.html { redirect_to [ @taskable, @task.task_list ], notice: "Subtask marked as completed." }
         format.turbo_stream
