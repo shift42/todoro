@@ -2,7 +2,7 @@ module Todoro
   class Task < ApplicationRecord
     belongs_to :task_list
     has_many :reminders, dependent: :destroy
-    has_many :task_steps, class_name: "Todoro::TaskStep", dependent: :destroy
+    has_many :task_steps, -> { order(created_at: :desc) }, class_name: "Todoro::TaskStep", dependent: :destroy
 
     has_many :task_assignments, dependent: :destroy
 
