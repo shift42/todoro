@@ -5,6 +5,21 @@ RSpec.describe Todoro::Task, type: :model do
   let(:task_list) { Todoro::TaskList.create(name: "Project Tasks", taskable: project) }
   let(:task) { Todoro::Task.create(title: "A task", task_list: task_list) }
 
+  describe "scopes" do
+    context 'default scope' do
+      let!(:other_task) { Todoro::Task.create(title: "A task", task_list: task_list) }
+      let!(:another_task) { Todoro::Task.create(title: "A task", task_list: task_list) }
+
+      before do
+        another_task.archive!
+      end
+
+      it 'returns all non archived tasks' do
+        expect(Todoro::Task.all).not_to include(another_task)
+      end
+    end
+  end
+
   describe "associations" do
     it "has many task steps" do
       step1 = Todoro::TaskStep.create!(task: task, title: "Step 1")
@@ -41,6 +56,21 @@ RSpec.describe Todoro::Task, type: :model do
 
     expect(task.task_steps.count).to eq(2)
     expect(task.task_steps).to include(step1, step2)
+  end
+
+  describe "#archived!" do
+    it "updates the status and sets the archived_at to now" do
+      datetime = Time.zone.local(2025, 2, 17, 10, 0, 0)
+
+      travel_to datetime do
+        task.archive!
+      end
+
+      task.reload
+
+      expect(task.status).to eq('archived')
+      expect(task.archived_at).to eq(datetime)
+    end
   end
 
   describe "#complete!" do
