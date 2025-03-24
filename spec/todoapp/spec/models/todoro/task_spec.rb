@@ -6,16 +6,22 @@ RSpec.describe Todoro::Task, type: :model do
   let(:task) { Todoro::Task.create(title: "A task", task_list: task_list) }
 
   describe "scopes" do
-    context 'default scope' do
-      let!(:other_task) { Todoro::Task.create(title: "A task", task_list: task_list) }
-      let!(:another_task) { Todoro::Task.create(title: "A task", task_list: task_list) }
+    let!(:other_task) { Todoro::Task.create(title: "A task", task_list: task_list) }
+    let!(:another_task) { Todoro::Task.create(title: "A task", task_list: task_list) }
 
-      before do
-        another_task.archive!
-      end
+    before do
+      another_task.archive!
+    end
 
+    context 'default' do
       it 'returns all non archived tasks' do
         expect(Todoro::Task.all).not_to include(another_task)
+      end
+    end
+
+    context 'with_archived' do
+      it 'returns all tasks including archived ones' do
+        expect(Todoro::Task.with_archived).to include(another_task)
       end
     end
   end

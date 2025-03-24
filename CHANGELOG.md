@@ -10,6 +10,9 @@
 - Introduced `taskable_assignee`, allowing models to register as assignable entities.
 - Tasks now support dynamic polymorphic assignments to multiple assignees (e.g., `Employee`, `Role`).
 - Automatically generates `has_many` associations in `Todoro::Task` for each registered `taskable_assignee`.
+- Introduced archive! method in Todoro::Task to set archived_at timestamp and mark tasks as archived
+- Add default scope that only retrieves non archived tasks
+- Add with_archived scope that retrieves all tasks, including archived ones
 
 ### 0.1.5 - 2025-02-16
 
