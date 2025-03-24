@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_17_191413) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_24_135734) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -74,12 +74,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_17_191413) do
     t.integer "priority", default: 1, null: false
     t.integer "recurrence_pattern"
     t.datetime "completed_at"
+    t.datetime "archived_at"
+    t.index ["archived_at"], name: "index_todoro_tasks_on_archived_at"
     t.index ["due_date"], name: "index_todoro_tasks_on_due_date"
     t.index ["status"], name: "index_todoro_tasks_on_status"
     t.index ["task_list_id"], name: "index_todoro_tasks_on_task_list_id"
     t.check_constraint "(recurrence_pattern = ANY (ARRAY[0, 1, 2, 3])) OR recurrence_pattern IS NULL", name: "recurrence_check"
     t.check_constraint "priority = ANY (ARRAY[0, 1, 2])", name: "priority_check"
-    t.check_constraint "status::text = ANY (ARRAY['pending'::character varying, 'completed'::character varying]::text[])", name: "status_check"
+    t.check_constraint "status::text = ANY (ARRAY['pending'::character varying, 'completed'::character varying, 'archived'::character varying]::text[])", name: "status_check"
   end
 
   create_table "users", force: :cascade do |t|
