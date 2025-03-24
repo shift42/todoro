@@ -1,6 +1,7 @@
 module Todoro
   class Task < ApplicationRecord
     default_scope -> { where(archived_at: nil) }
+    scope :with_archived, -> { unscoped.where.not(status: "archived", archived_at: nil) }
 
     belongs_to :task_list
     has_many :reminders, dependent: :destroy
