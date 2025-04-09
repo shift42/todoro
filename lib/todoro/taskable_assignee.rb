@@ -4,11 +4,13 @@ module Todoro
 
     included do
       has_many :task_assignments, as: :assignee, class_name: "Todoro::TaskAssignment", dependent: :destroy
-      has_many :tasks, through: :task_assignments, source: :task
+      has_many :assigned_tasks, through: :task_assignments, source: :task
     end
 
     class_methods do
       def taskable_assignee
+        include Todoro::TaskableAssignee
+
         Todoro.assignable_models << self.name unless Todoro.assignable_models.include?(self.name)
 
         Todoro::Task.class_eval <<-RUBY, __FILE__, __LINE__ + 1

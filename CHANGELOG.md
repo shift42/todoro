@@ -13,6 +13,7 @@
 - Introduced archive! method in Todoro::Task to set archived_at timestamp and mark tasks as archived
 - Add default scope that only retrieves non archived tasks
 - Add with_archived scope that retrieves all tasks, including archived ones
+- Rename taskable_assignee task retrieving association to `assigned_tasks`
 
 ### 0.1.5 - 2025-02-16
 
