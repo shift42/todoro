@@ -1,5 +1,9 @@
 # Unreleased
 
+### 1.0.1 - 2026-07-11
+
+- Relax Rails dependency from `~> 7.2.1` to `>= 7.2.1` to support Rails 8
+
 ### 1.0.0 - 2026-07-08
 
 #### Breaking Changes
