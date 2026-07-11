@@ -1,5 +1,8 @@
 module Todoro
   class Task < ApplicationRecord
+    default_scope -> { where(archived_at: nil) }
+    scope :with_archived, -> { unscoped.where.not(status: "archived", archived_at: nil) }
+
     belongs_to :task_list
     has_many :reminders, dependent: :destroy
     has_many :task_steps, -> { order(created_at: :desc) }, class_name: "Todoro::TaskStep", dependent: :destroy
@@ -7,13 +10,17 @@ module Todoro
     has_many :task_assignments, dependent: :destroy
 
     validates :title, presence: true
-    validates :status, presence: true, inclusion: { in: %w[pending completed] }
+    validates :status, presence: true, inclusion: { in: %w[pending completed archived] }
 
-    enum :status, { pending: "pending", completed: "completed" }
+    enum :status, { pending: "pending", completed: "completed", archived: "archived" }
 
     after_create :set_default_reminders
 
     accepts_nested_attributes_for :task_steps
+
+    def archive!
+      update(status: "archived", archived_at: Time.zone.now)
+    end
 
     def complete!
       update(status: "completed", completed_at: Time.zone.now)
