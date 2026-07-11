@@ -1,19 +1,34 @@
 # Unreleased
 
-- Bug fix: Update generated routes so that resource root path does not override existing applciation routes
+### 1.0.0 - 2026-07-08
+
+#### Breaking Changes
+
+- **Renamed association**: `taskable_assignee` models no longer expose `.tasks` — use `.assigned_tasks` instead
+- **Default scope on `Todoro::Task`**: `Task.all` now excludes archived tasks. Use `Task.with_archived` to include them.
+
+#### New Features
+
+- Added `archive!` method on `Todoro::Task` — sets `status: "archived"` and records `archived_at` timestamp
+- Added `archived` status to the `status` enum (valid values: `pending`, `completed`, `archived`)
+- Added `with_archived` scope to retrieve all tasks including archived ones
+- Added migration template `update_todoro_tasks_to_be_archivable` — adds `archived_at` column and updates the DB status constraint
+
+#### Fixes
+
+- Migration `update_todoro_tasks_to_be_archivable` corrected to use `up`/`down` — `execute` was previously called at class level outside any method
+
+#### Other Changes (previously unreleased from 0.1.5)
+
+- Bug fix: Update generated routes so that resource root path does not override existing application routes
 - Add initializer to precompile assets so that main app can load views with Todoro's layout
-- Added support for **Task Steps**
-- Updated **Tasks**: renamed `expiry_date` to `due_date` and introduced `completed_at`, `priority` and `reccuring_pattern`
-- Introduced complete! method in Todoro::Task to set completed_at timestamp and mark tasks as completed.
-- Added Todoro::TaskStep model, allowing tasks to have multiple subtasks.
-- Integrated Turbo to enable dynamic subtask creation and completion without full-page reloads.
-- Introduced `taskable_assignee`, allowing models to register as assignable entities.
-- Tasks now support dynamic polymorphic assignments to multiple assignees (e.g., `Employee`, `Role`).
-- Automatically generates `has_many` associations in `Todoro::Task` for each registered `taskable_assignee`.
-- Introduced archive! method in Todoro::Task to set archived_at timestamp and mark tasks as archived
-- Add default scope that only retrieves non archived tasks
-- Add with_archived scope that retrieves all tasks, including archived ones
-- Rename taskable_assignee task retrieving association to `assigned_tasks`
+- Added support for **Task Steps** (`Todoro::TaskStep`)
+- Updated **Tasks**: renamed `expiry_date` to `due_date`, introduced `completed_at`, `priority` and `recurring_pattern`
+- Introduced `complete!` method to set `completed_at` and mark tasks as completed
+- Integrated Turbo for dynamic subtask creation and completion without full-page reloads
+- Introduced `taskable_assignee`, allowing models to register as assignable entities
+- Tasks support dynamic polymorphic assignments to multiple assignees (e.g. `Employee`, `Role`)
+- Automatically generates `has_many` associations in `Todoro::Task` for each registered `taskable_assignee`
 
 ### 0.1.5 - 2025-02-16
 
